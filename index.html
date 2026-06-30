@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RoofIQ | Roofing Market Intelligence</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="cube"></div><div><strong>RoofIQ</strong><span>Market Intelligence</span></div></div>
+      <nav>
+        <a class="active">Dashboard</a><a>Map View</a><a>Market Explorer</a><a>AI Reports</a><a>Data Sources</a>
+      </nav>
+      <div class="sidecard"><b>Prototype Mode</b><p>Modeled starter data for interface testing. Source-grade data comes next, because reality insists on paperwork.</p></div>
+    </aside>
+    <main>
+      <header class="topbar"><div><h1>U.S. Roofing Market Intelligence</h1><p>Explore commercial roofing opportunity by market, weather, FM fit, and workable days.</p></div><button id="resetBtn">Reset Filters</button></header>
+      <section class="kpis">
+        <div class="card"><span>Top Opportunity</span><b id="topMarket">-</b><strong id="topScore">-</strong></div>
+        <div class="card"><span>Total Markets</span><b id="marketCount">50</b><small>Metro areas</small></div>
+        <div class="card"><span>Avg Roofing Score</span><b id="avgScore">-</b><small>Visible markets</small></div>
+        <div class="card"><span>High Opportunity</span><b id="highCount">-</b><small>Score ≥ 70</small></div>
+      </section>
+      <section class="layout">
+        <div class="panel mapPanel">
+          <div class="panelHead"><div><h2>U.S. Market Opportunity Map</h2><p>Click any dot to inspect a market.</p></div><select id="metricSelect"><option value="roofing">Roofing Score</option><option value="fm">FM Score</option><option value="weather">Weather Risk</option><option value="workDays">Workable Days</option></select></div>
+          <div class="legend"><span>Lower</span><div class="grad"></div><span>Higher</span></div>
+          <div id="map" class="mapCanvas" aria-label="US market map"></div>
+        </div>
+        <aside class="panel detailPanel">
+          <h2 id="selectedName">Select a Market</h2>
+          <p id="selectedSummary">Click a dot or table row. Asking the map politely will not work.</p>
+          <div class="scoreGrid">
+            <div><span>Roofing</span><b id="dRoof">-</b></div><div><span>FM</span><b id="dFm">-</b></div><div><span>Weather</span><b id="dWeather">-</b></div><div><span>Work Days</span><b id="dWork">-</b></div>
+          </div>
+          <h3>Top Visible Markets</h3><ol id="topList" class="topList"></ol>
+        </aside>
+      </section>
+      <section class="panel filters">
+        <label>Search<input id="searchInput" placeholder="City or state..." /></label>
+        <label>Region<select id="regionFilter"><option value="all">All Regions</option></select></label>
+        <label>Tier<select id="tierFilter"><option value="all">All Tiers</option><option>A</option><option>B</option><option>C</option></select></label>
+        <label>Minimum Roofing Score<input id="scoreFilter" type="range" min="0" max="90" value="0" /><span id="scoreValue">0</span></label>
+      </section>
+      <section class="panel tablePanel">
+        <h2>Market Explorer</h2>
+        <div class="tableWrap"><table><thead><tr><th>Market</th><th>Region</th><th>Tier</th><th>Roofing</th><th>FM</th><th>Rain Days</th><th>Work Days</th></tr></thead><tbody id="marketRows"></tbody></table></div>
+      </section>
+    </main>
+  </div>
+  <script src="market-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
