@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RoofIQ Trial | Commercial Roofing Market Intelligence</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="mark">RQ</div>
+        <div><h1>RoofIQ</h1><p>Market Intelligence Trial</p></div>
+      </div>
+      <div class="control-group"><label for="searchInput">Search market</label><input id="searchInput" type="search" placeholder="Phoenix, Denver, Chicago..." /></div>
+      <div class="control-grid">
+        <div class="control-group"><label for="regionFilter">Region</label><select id="regionFilter"><option value="all">All regions</option></select></div>
+        <div class="control-group"><label for="tierFilter">Tier</label><select id="tierFilter"><option value="all">All tiers</option></select></div>
+      </div>
+      <div class="control-group"><label for="metricSelect">Map metric</label><select id="metricSelect"><option value="overallScore">Overall Opportunity</option><option value="roofingScore">Roofing Score</option><option value="fmScore">FM / Insurance Score</option><option value="weatherRisk">Weather Delay Risk</option><option value="workableDays">Workable Roof Days</option><option value="competitionScore">Competition Pressure</option></select></div>
+      <div class="legend"><span><i class="dot high"></i> Strong</span><span><i class="dot mid"></i> Mid</span><span><i class="dot low"></i> Weak / Risk</span></div>
+      <section class="panel compact"><h2>Top Visible Markets</h2><div id="topMarkets" class="top-list"></div></section>
+    </aside>
+    <main class="main">
+      <header class="hero">
+        <div><p class="eyebrow">Commercial Roofing Market Intelligence</p><h2>U.S. Market Opportunity Trial</h2><p class="subhead">Click a market dot or table row. Filter by region, tier, and score metric.</p></div>
+        <div class="hero-actions"><button id="clearFilters" class="ghost">Clear Filters</button><button id="rankByOpportunity" class="primary">Rank Opportunity</button></div>
+      </header>
+      <section class="kpis" id="kpis"></section>
+      <section class="workspace">
+        <div class="map-card">
+          <div class="map-toolbar"><div><h2>Market Map</h2><p id="mapSubtitle">Metric: Overall Opportunity</p></div><span id="visibleCountMap" class="pill"></span></div>
+          <div id="marketMap" class="market-map" aria-label="Clickable US market map">
+            <div class="us-shape west"></div><div class="us-shape central"></div><div class="us-shape east"></div><div class="us-shape florida"></div>
+            <div class="map-grid-label west-label">WEST</div><div class="map-grid-label plains-label">PLAINS</div><div class="map-grid-label east-label">EAST</div>
+            <div id="markerLayer" class="marker-layer"></div>
+          </div>
+        </div>
+        <aside class="detail-card" id="detailCard"></aside>
+      </section>
+      <section class="panel">
+        <div class="panel-header"><div><h2>Market Table</h2><p>Every row is clickable. Civilization advances.</p></div><span id="visibleCount" class="pill"></span></div>
+        <div class="table-wrap"><table><thead><tr><th>Market</th><th>Region</th><th>Tier</th><th>Overall</th><th>Roofing</th><th>FM</th><th>Rain Days</th><th>Workable Days</th><th>Weather Risk</th></tr></thead><tbody id="marketTable"></tbody></table></div>
+      </section>
+    </main>
+  </div>
+  <script src="market-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
