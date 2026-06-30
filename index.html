@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RoofIQ | Commercial Roofing Market Intelligence</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand-row">
+        <div class="brand-mark">RQ</div>
+        <div>
+          <h1>RoofIQ</h1>
+          <p>Market Intelligence</p>
+        </div>
+      </div>
+
+      <nav class="nav-stack" aria-label="Main navigation">
+        <button class="nav-item active" type="button">Dashboard</button>
+        <button class="nav-item" type="button">Markets</button>
+        <button class="nav-item" type="button">Reports</button>
+        <button class="nav-item" type="button">Compare</button>
+      </nav>
+
+      <section class="filter-card">
+        <label for="searchInput">Search market</label>
+        <input id="searchInput" type="search" placeholder="Phoenix, Dallas, Chicago..." />
+
+        <div class="two-col">
+          <div>
+            <label for="regionFilter">Region</label>
+            <select id="regionFilter"><option value="all">All</option></select>
+          </div>
+          <div>
+            <label for="tierFilter">Tier</label>
+            <select id="tierFilter"><option value="all">All</option></select>
+          </div>
+        </div>
+
+        <label for="metricSelect">Map metric</label>
+        <select id="metricSelect">
+          <option value="overallScore">Overall Opportunity</option>
+          <option value="roofingScore">Roofing Score</option>
+          <option value="fmScore">FM / Insurance Score</option>
+          <option value="weatherRisk">Weather Risk</option>
+          <option value="workableDays">Workable Roof Days</option>
+          <option value="competitionScore">Competition Pressure</option>
+        </select>
+      </section>
+
+      <section class="panel tight">
+        <div class="panel-title-row">
+          <h2>Top Markets</h2>
+          <span id="visibleCount" class="badge">0</span>
+        </div>
+        <div id="topMarkets" class="top-list"></div>
+      </section>
+    </aside>
+
+    <main class="main">
+      <header class="hero-card">
+        <div>
+          <p class="eyebrow">Commercial Roofing Market Intelligence</p>
+          <h2>U.S. roofing opportunity, mapped.</h2>
+          <p class="subhead">Filter markets, click cities, compare roofing demand, FM fit, weather delay risk, and workable production days.</p>
+        </div>
+        <div class="hero-actions">
+          <button id="resetView" class="button ghost" type="button">Reset View</button>
+          <button id="exportReport" class="button primary" type="button">View City Report</button>
+        </div>
+      </header>
+
+      <section id="kpis" class="kpi-grid" aria-label="Key metrics"></section>
+
+      <section class="dashboard-grid">
+        <article class="map-panel">
+          <div class="map-header">
+            <div>
+              <h2>Market Map</h2>
+              <p id="metricHelper">Marker size follows selected metric. Big dots are not decorative confetti.</p>
+            </div>
+            <div class="map-legend">
+              <span><i class="legend-dot high"></i>High</span>
+              <span><i class="legend-dot mid"></i>Medium</span>
+              <span><i class="legend-dot low"></i>Low</span>
+            </div>
+          </div>
+          <div class="us-map-wrap" id="mapWrap">
+            <svg class="us-map-bg" viewBox="0 0 1000 610" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <defs>
+                <linearGradient id="land" x1="0" x2="1" y1="0" y2="1">
+                  <stop offset="0" stop-color="#16304f" />
+                  <stop offset="1" stop-color="#0e2037" />
+                </linearGradient>
+                <radialGradient id="glow" cx="50%" cy="48%" r="70%">
+                  <stop offset="0" stop-color="#1f6d93" stop-opacity="0.22" />
+                  <stop offset="1" stop-color="#081426" stop-opacity="0" />
+                </radialGradient>
+              </defs>
+              <rect x="0" y="0" width="1000" height="610" fill="url(#glow)" />
+              <path class="land-mass" d="M75,210 C135,156 214,138 287,154 C358,170 405,122 476,135 C568,151 633,126 703,153 C763,176 815,193 879,187 C925,184 952,221 931,261 C900,320 922,360 884,398 C833,449 744,429 689,466 C614,517 523,503 456,465 C385,424 322,453 253,427 C178,399 112,368 89,308 C74,268 43,242 75,210 Z"/>
+              <path class="coast" d="M89,303 C165,327 236,343 317,330 C429,314 536,354 642,335 C733,319 823,327 912,293"/>
+              <path class="coast" d="M160,226 C260,210 360,222 445,198 C542,171 663,185 781,216"/>
+              <text x="78" y="552" class="map-note">Modeled trial data. Replace with verified source-grade data before selling. Yes, really.</text>
+            </svg>
+            <div id="marketDots" class="market-dots"></div>
+          </div>
+        </article>
+
+        <aside id="detailCard" class="detail-panel"></aside>
+      </section>
+
+      <section class="table-panel">
+        <div class="panel-title-row">
+          <div>
+            <h2>Market Rankings</h2>
+            <p>Click any row to update the market profile.</p>
+          </div>
+          <button id="sortToggle" class="button ghost small" type="button">Sort: Opportunity</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Market</th>
+                <th>Region</th>
+                <th>Tier</th>
+                <th>Overall</th>
+                <th>Roofing</th>
+                <th>FM</th>
+                <th>Rain Days</th>
+                <th>Workable Days</th>
+                <th>Weather Risk</th>
+              </tr>
+            </thead>
+            <tbody id="marketTable"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="reportModal" class="modal" hidden>
+    <div class="modal-card">
+      <button id="closeModal" class="modal-close" type="button">×</button>
+      <div id="reportContent"></div>
+    </div>
+  </div>
+
+  <script src="market-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
